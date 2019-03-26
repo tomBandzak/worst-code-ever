@@ -87,7 +87,7 @@ class App extends Component<IProps, IState> {
 
     return (
       <div id="main">
-        <SideNav menuClickItem={this.menuClickItem.bind(this)} closeNav={closeNav}/>
+        <SideNav menuClickItem={this.menuClickItem} closeNav={closeNav}/>
         <div className="App">
           <button onClick={() => openNav()}>menu</button>
           <br/><br/>
