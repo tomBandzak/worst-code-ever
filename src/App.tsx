@@ -61,9 +61,13 @@ class App extends Component<IProps, IState> {
     this.setState({ search: e.target.value })
   };
 
-  addFavourite = (email: string) => {
-    const length = this.state.favourites.length;
-    this.state.favourites[length] = email;
+  toggleFavourite = (email: string) => {
+    let index = this.state.favourites.indexOf(email);
+    if(index === -1) {
+      this.state.favourites.push(email);
+    } else {
+      delete this.state.favourites[index];
+    }
     this.setState({ favourites: this.state.favourites })
   };
 
@@ -78,8 +82,7 @@ class App extends Component<IProps, IState> {
   };
 
   render = () => {
-    let data = this.state.data;
-    let { search, favourites } = this.state;
+    let { data, search, favourites } = this.state;
 
     return (
       <div id="main">
@@ -90,11 +93,11 @@ class App extends Component<IProps, IState> {
           {this.state.location === 'home' &&
           <div>
             <AddressBook
-                addFavourite={this.addFavourite}
-                favourites={favourites}
-                search={search}
-                data={data}
-                onSearch={this.onSearch}
+              toggleFavourite={this.toggleFavourite}
+              favourites={favourites}
+              search={search}
+              data={data}
+              onSearch={this.onSearch}
             />
             <button onClick={this.prevPage}>prev</button>{this.state.page}
             <button onClick={this.nextPage}>next</button>

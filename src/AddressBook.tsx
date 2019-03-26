@@ -25,7 +25,7 @@ class AddressBook extends Component<any> {
       items[i] = (
           <AddressBookItem
               isFavourite={this.props.favourites.includes(this.props.data.results[i].email)}
-              onClick={this.props.addFavourite}
+              onClick={this.props.toggleFavourite}
               {...this.props.data.results[i]}
           />
       )
