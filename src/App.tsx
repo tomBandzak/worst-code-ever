@@ -82,7 +82,9 @@ class App extends Component<IProps, IState> {
   };
 
   render = () => {
-    let { data, search, favourites } = this.state;
+    let { data, location, search, favourites, page } = this.state;
+
+
 
     return (
       <div id="main">
@@ -90,7 +92,7 @@ class App extends Component<IProps, IState> {
         <div className="App">
           <button onClick={() => openNav()}>menu</button>
           <br/><br/>
-          {this.state.location === 'home' &&
+          {data && location === 'home' &&
           <div>
             <AddressBook
               toggleFavourite={this.toggleFavourite}
@@ -99,11 +101,11 @@ class App extends Component<IProps, IState> {
               data={data}
               onSearch={this.onSearch}
             />
-            <button onClick={this.prevPage}>prev</button>{this.state.page}
+            <button onClick={this.prevPage}>prev</button>{page}
             <button onClick={this.nextPage}>next</button>
           </div>
           }
-          {this.state.location === 'favourites' &&
+          {location === 'favourites' &&
           <Favourites data={favourites}/>
           }
         </div>

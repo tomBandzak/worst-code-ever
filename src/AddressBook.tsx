@@ -2,40 +2,11 @@ import React, { Component } from 'react'
 import AddressBookItem from './AddressbookItem'
 
 
-class AddressBook extends Component<any> {
-  constructor(props: any) {
-    super(props)
-  }
-
-  render = () => {
-    if (!this.props.data) {
-      return null
-    }
-
-    let items: any = new Array();
-    for (let i = 0; i < this.props.data.results.length; i++) {
-      if (
-        this.props.search &&
-        !this.props.data.results[i].name.first.includes(this.props.search) &&
-        !this.props.data.results[i].name.last.includes(this.props.search)
-      ) {
-        continue
-      }
-
-      items[i] = (
-          <AddressBookItem
-              isFavourite={this.props.favourites.includes(this.props.data.results[i].email)}
-              onClick={this.props.toggleFavourite}
-              {...this.props.data.results[i]}
-          />
-      )
-    }
-
-    return (
+const AddressBook = ({toggleFavourite, favourites, search, data, onSearch}: any) => (
       <div>
         <h1>AddressBook</h1>
         <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <input type="search" onChange={this.props.onSearch} placeholder="search"/>
+          <input type="search" onChange={onSearch} placeholder="search"/>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
           <table>
@@ -46,12 +17,16 @@ class AddressBook extends Component<any> {
               <th/>
             </tr>
             </thead>
-            <tbody>{items}</tbody>
+            <tbody>{data.results.map((item: any) => (!search || item.name.first.includes(search) || item.name.last.includes(search) ) &&
+              <AddressBookItem
+                isFavourite={favourites.includes(item.email)}
+                onClick={toggleFavourite}
+                {...item}
+              />)}</tbody>
           </table>
         </div>
       </div>
-    )
-  }
-}
+);
+
 
 export default AddressBook
