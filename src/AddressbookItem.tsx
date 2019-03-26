@@ -7,6 +7,6 @@ const AddressBookItem = (item: any) => (
     <td>{item.name.last}</td>
     <td><button onClick={() => item.onClick(item.email)}>Like</button></td>
   </tr>
-)
+);
 
 export default AddressBookItem

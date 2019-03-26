@@ -38,7 +38,7 @@ class App extends Component<IProps, IState> {
     }
   }
 
-  fetch(page: number) {
+  fetch = (page: number) => {
     // @ts-ignore
     $.ajax({
       url: `https://randomuser.me/api/?page=${page}&&results=10&seed=worst-code-ever`,
@@ -47,43 +47,43 @@ class App extends Component<IProps, IState> {
         this.setState({ data })
       },
     })
-  }
+  };
 
-  componentDidMount(): void {
+  componentDidMount = (): void => {
     this.fetch(this.state.page)
-  }
+  };
 
-  menuClickItem(location: string) {
+  menuClickItem = (location: string) => {
     this.setState({ location })
-  }
+  };
 
-  onSearch(e: any) {
+  onSearch = (e: any) => {
     this.setState({ search: e.target.value })
-  }
+  };
 
-  addFavourite(email: string) {
+  addFavourite = (email: string) => {
     const length = this.state.favourites.length;
     this.state.favourites[length] = email;
     this.setState({ favourites: this.state.favourites })
-  }
+  };
 
-  nextPage() {
+  nextPage = () => {
     const currentPage = this.state.page;
     this.fetch(currentPage + 1);
     this.setState({ page: currentPage + 1})
-  }
+  };
 
-  prevPage() {
+  prevPage = () => {
     const currentPage = this.state.page;
     const page = currentPage > 1 ? currentPage - 1 : 1;
 
     this.fetch(page);
     this.setState({ page })
-  }
+  };
 
-  render() {
-    var data = this.state.data;
-    var { search, favourites } = this.state;
+  render = () => {
+    let data = this.state.data;
+    let { search, favourites } = this.state;
 
     return (
       <div id="main">
@@ -94,11 +94,11 @@ class App extends Component<IProps, IState> {
           {this.state.location === 'home' &&
           <div>
             <AddressBook
-                addFavourite={this.addFavourite.bind(this)}
+                addFavourite={this.addFavourite}
                 favourites={favourites}
                 search={search}
                 data={data}
-                onSearch={this.onSearch.bind(this)}
+                onSearch={this.onSearch}
             />
             <button onClick={() => this.prevPage()}>prev</button>{this.state.page}
             <button onClick={() => this.nextPage()}>next</button>
@@ -110,7 +110,7 @@ class App extends Component<IProps, IState> {
         </div>
       </div>
     )
-  }
+  };
 }
 
 export default App

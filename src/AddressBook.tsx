@@ -7,13 +7,13 @@ class AddressBook extends Component<any> {
     super(props)
   }
 
-  render() {
+  render = () => {
     if (!this.props.data) {
       return null
     }
 
-    var items: any = new Array();
-    for (var i = 0; i < this.props.data.results.length; i++) {
+    let items: any = new Array();
+    for (let i = 0; i < this.props.data.results.length; i++) {
       if (
         this.props.search &&
         !this.props.data.results[i].name.first.includes(this.props.search) &&
