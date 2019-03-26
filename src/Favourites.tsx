@@ -7,6 +7,6 @@ const Favourites = ({ data }: any) => (
       {data.map((d: string) => <li>{d}</li>)}
     </ul>
   </div>
-)
+);
 
 export default Favourites;

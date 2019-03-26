@@ -12,7 +12,7 @@ class AddressBook extends Component<any> {
       return null
     }
 
-    var items: any = new Array()
+    var items: any = new Array();
     for (var i = 0; i < this.props.data.results.length; i++) {
       if (
         this.props.search &&
@@ -22,11 +22,13 @@ class AddressBook extends Component<any> {
         continue
       }
 
-      items[i] = <AddressBookItem
-        isFavourite={this.props.favourites.includes(this.props.data.results[i].email)}
-        onClick={this.props.addFavourite}
-        {...this.props.data.results[i]}
-      />
+      items[i] = (
+          <AddressBookItem
+              isFavourite={this.props.favourites.includes(this.props.data.results[i].email)}
+              onClick={this.props.addFavourite}
+              {...this.props.data.results[i]}
+          />
+      )
     }
 
     return (
@@ -41,7 +43,7 @@ class AddressBook extends Component<any> {
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
-              <th></th>
+              <th/>
             </tr>
             </thead>
             <tbody>{items}</tbody>

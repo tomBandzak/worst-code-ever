@@ -4,10 +4,10 @@ import AddressBook from './AddressBook'
 import SideNav from './SideNav'
 import Favourites from './Favourites'
 
-interface Props {
+interface IProps {
 }
 
-interface State {
+interface IState {
   data?: any,
   location: string,
   search?: string,
@@ -27,10 +27,10 @@ function closeNav() {
   document.getElementById('mySidenav').style.width = '0'
 }
 
-class App extends Component<Props, State> {
+class App extends Component<IProps, IState> {
 
   constructor(props: any) {
-    super(props)
+    super(props);
     this.state = {
       location: 'home',
       page: 1,
@@ -69,7 +69,7 @@ class App extends Component<Props, State> {
 
   nextPage() {
     const currentPage = this.state.page;
-    this.fetch(currentPage + 1)
+    this.fetch(currentPage + 1);
     this.setState({ page: currentPage + 1})
   }
 
@@ -77,13 +77,13 @@ class App extends Component<Props, State> {
     const currentPage = this.state.page;
     const page = currentPage > 1 ? currentPage - 1 : 1;
 
-    this.fetch(page)
+    this.fetch(page);
     this.setState({ page })
   }
 
   render() {
-    var data = this.state.data
-    var { search, favourites } = this.state
+    var data = this.state.data;
+    var { search, favourites } = this.state;
 
     return (
       <div id="main">
@@ -91,16 +91,20 @@ class App extends Component<Props, State> {
         <div className="App">
           <button onClick={() => openNav()}>menu</button>
           <br/><br/>
-          {this.state.location == 'home' &&
+          {this.state.location === 'home' &&
           <div>
-            <AddressBook addFavourite={this.addFavourite.bind(this)} favourites={favourites} search={search} data={data}
-                         onSearch={this.onSearch.bind(this)}
+            <AddressBook
+                addFavourite={this.addFavourite.bind(this)}
+                favourites={favourites}
+                search={search}
+                data={data}
+                onSearch={this.onSearch.bind(this)}
             />
             <button onClick={() => this.prevPage()}>prev</button>{this.state.page}
             <button onClick={() => this.nextPage()}>next</button>
           </div>
           }
-          {this.state.location == 'favourites' &&
+          {this.state.location === 'favourites' &&
           <Favourites data={favourites}/>
           }
         </div>
