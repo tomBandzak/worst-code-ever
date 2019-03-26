@@ -44,7 +44,7 @@ class App extends Component<IProps, IState> {
       url: `https://randomuser.me/api/?page=${page}&&results=10&seed=worst-code-ever`,
       dataType: 'json',
       success: (data: any) => {
-        this.setState({ data })
+        this.setState({ page: page, data: data });
       },
     })
   };
@@ -70,15 +70,11 @@ class App extends Component<IProps, IState> {
   nextPage = () => {
     const currentPage = this.state.page;
     this.fetch(currentPage + 1);
-    this.setState({ page: currentPage + 1})
   };
 
   prevPage = () => {
     const currentPage = this.state.page;
-    const page = currentPage > 1 ? currentPage - 1 : 1;
-
-    this.fetch(page);
-    this.setState({ page })
+    this.fetch(currentPage > 1 ? currentPage - 1 : 1);
   };
 
   render = () => {
@@ -100,8 +96,8 @@ class App extends Component<IProps, IState> {
                 data={data}
                 onSearch={this.onSearch}
             />
-            <button onClick={() => this.prevPage()}>prev</button>{this.state.page}
-            <button onClick={() => this.nextPage()}>next</button>
+            <button onClick={this.prevPage}>prev</button>{this.state.page}
+            <button onClick={this.nextPage}>next</button>
           </div>
           }
           {this.state.location === 'favourites' &&
