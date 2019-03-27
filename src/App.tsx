@@ -74,7 +74,7 @@ class App extends Component<IProps, IState> {
   render = () => {
     let { data, search, favourites, page, navigation } = this.state;
     return (
-      <div id="main">
+      <div className={navigation ? 'with-navigation' : ''} id="main">
         <button onClick={this.toggleNavigation}>menu</button>
         <br/><br/>
         <SideNav favourites={favourites} closeNav={this.toggleNavigation} open={navigation}/>

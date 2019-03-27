@@ -16,7 +16,7 @@ const Favourites = ({ data, onClick }: any) => (
           {data.map((email: any) =>
             <tr key={'f_' + email}>
                 <td>{email}</td>
-                <td><span className="fa fa-star checked" onClick={() => onClick(email)}></span></td>
+                <td><span className="fa fa-star checked" onClick={() => onClick(email)} /></td>
             </tr>)}
           </tbody>
           }
