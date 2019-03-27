@@ -29,24 +29,21 @@ class App extends Component<IProps, IState> {
   }
   dataCache: any = [];
 
-  fetch = (page: number) => {
+  fetchData = (page: number) => {
     if(this.dataCache[page]) {
       this.setState({ page: page, data: this.dataCache[page] });
     } else {
-      // @ts-ignore
-      $.ajax({
-        url: `https://randomuser.me/api/?page=${page}&&results=10&seed=worst-code-ever`,
-        dataType: 'json',
-        success: (data: any) => {
-          this.dataCache[page] = data;
-          this.setState({page: page, data: data});
-        },
-      })
+      fetch(`https://randomuser.me/api/?page=${page}&&results=10&seed=worst-code-ever`).then((response) => {
+        return response.json();
+      }).then((data) => {
+        this.dataCache[page] = data;
+        this.setState({page: page, data: data});
+      });
     }
   };
 
   componentDidMount = (): void => {
-    this.fetch(this.state.page)
+    this.fetchData(this.state.page)
   };
 
   menuClickItem = (location: string) => {
@@ -71,12 +68,12 @@ class App extends Component<IProps, IState> {
 
   nextPage = () => {
     const currentPage = this.state.page;
-    this.fetch(currentPage + 1);
+    this.fetchData(currentPage + 1);
   };
 
   prevPage = () => {
     const currentPage = this.state.page;
-    this.fetch(currentPage > 1 ? currentPage - 1 : 1);
+    this.fetchData(currentPage > 1 ? currentPage - 1 : 1);
   };
 
   render = () => {
