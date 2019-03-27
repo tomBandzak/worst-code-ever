@@ -9,6 +9,7 @@ const AddressBook = ({toggleFavourite, favourites, search, data, onSearch}: any)
           <input type="search" onChange={onSearch} placeholder="search"/>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+          {data &&
           <table>
             <thead>
             <tr>
@@ -23,7 +24,7 @@ const AddressBook = ({toggleFavourite, favourites, search, data, onSearch}: any)
                 onClick={toggleFavourite}
                 {...item}
               />)}</tbody>
-          </table>
+          </table>}
         </div>
       </div>
 );

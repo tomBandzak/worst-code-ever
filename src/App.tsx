@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Route, Switch } from 'react-router-dom'
 import './App.css'
 import AddressBook from './AddressBook'
 import SideNav from './SideNav'
@@ -46,10 +47,6 @@ class App extends Component<IProps, IState> {
     this.fetchData(this.state.page)
   };
 
-  menuClickItem = (location: string) => {
-    this.setState({ location })
-  };
-
   onSearch = (e: any) => {
     this.setState({ search: e.target.value })
   };
@@ -80,26 +77,24 @@ class App extends Component<IProps, IState> {
     let { data, location, search, favourites, page, navigation } = this.state;
     return (
       <div id="main">
-        <SideNav menuClickItem={this.menuClickItem} closeNav={this.toggleNavigation} open={navigation}/>
+        <button onClick={this.toggleNavigation}>menu</button>
+        <br/><br/>
+        <SideNav favourites={favourites} closeNav={this.toggleNavigation} open={navigation}/>
         <div className="App">
-          <button onClick={this.toggleNavigation}>menu</button>
-          <br/><br/>
-          {data && location === 'home' &&
-          <div>
-            <AddressBook
+          <Switch>
+            <Route exact path="/" render={props => <AddressBook
+              {...props}
               toggleFavourite={this.toggleFavourite}
               favourites={favourites}
               search={search}
               data={data}
               onSearch={this.onSearch}
+            />}
             />
-            <button onClick={this.prevPage}>prev</button>{page}
-            <button onClick={this.nextPage}>next</button>
-          </div>
-          }
-          {location === 'favourites' &&
-          <Favourites data={favourites}/>
-          }
+            <Route exact path="/favourites" render={props => <Favourites  {...props} data={favourites}/>} />
+          </Switch>
+          <button onClick={this.prevPage}>prev</button>{page}
+          <button onClick={this.nextPage}>next</button>
         </div>
       </div>
     )
