@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import AddressBookItem from './AddressbookItem'
 
-const AddressBook = ({toggleFavourite, favourites, search, data, onSearch}: any) => (
+const AddressBook = ({page, toggleFavourite, favourites, search, data, onSearch, prevPage, nextPage}: any) => (
       <div>
         <h1>Address Book</h1>
         <div>
@@ -26,6 +26,9 @@ const AddressBook = ({toggleFavourite, favourites, search, data, onSearch}: any)
               />)}</tbody>
           </table>}
         </div>
+        <button className="left-button" onClick={prevPage}>prev</button>
+        <strong>{page}</strong>
+        <button className="right-button" onClick={nextPage}>next</button>
       </div>
 );
 

@@ -10,7 +10,6 @@ interface IProps {
 
 interface IState {
   data?: any,
-  location: string,
   search?: string,
   favourites: string[];
   page: number;
@@ -22,7 +21,6 @@ class App extends Component<IProps, IState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      location: 'home',
       favourites: [],
       page: 1,
       navigation: false
@@ -74,7 +72,7 @@ class App extends Component<IProps, IState> {
   };
 
   render = () => {
-    let { data, location, search, favourites, page, navigation } = this.state;
+    let { data, search, favourites, page, navigation } = this.state;
     return (
       <div id="main">
         <button onClick={this.toggleNavigation}>menu</button>
@@ -87,18 +85,18 @@ class App extends Component<IProps, IState> {
               path="/"
               render={props => <AddressBook
                 {...props}
+                page={page}
                 toggleFavourite={this.toggleFavourite}
                 favourites={favourites}
                 search={search}
                 data={data}
                 onSearch={this.onSearch}
+                prevPage={this.prevPage}
+                nextPage={this.nextPage}
               />}
             />
             <Route exact path="/favourites" render={props => <Favourites  {...props} data={favourites}/>} />
           </Switch>
-          <button className="left-button" onClick={this.prevPage}>prev</button>
-          <strong>{page}</strong>
-          <button className="right-button" onClick={this.nextPage}>next</button>
         </div>
       </div>
     )
