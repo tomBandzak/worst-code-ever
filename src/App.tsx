@@ -27,16 +27,22 @@ class App extends Component<IProps, IState> {
       navigation: false
     }
   }
+  dataCache: any = [];
 
   fetch = (page: number) => {
-    // @ts-ignore
-    $.ajax({
-      url: `https://randomuser.me/api/?page=${page}&&results=10&seed=worst-code-ever`,
-      dataType: 'json',
-      success: (data: any) => {
-        this.setState({ page: page, data: data });
-      },
-    })
+    if(this.dataCache[page]) {
+      this.setState({ page: page, data: this.dataCache[page] });
+    } else {
+      // @ts-ignore
+      $.ajax({
+        url: `https://randomuser.me/api/?page=${page}&&results=10&seed=worst-code-ever`,
+        dataType: 'json',
+        success: (data: any) => {
+          this.dataCache[page] = data;
+          this.setState({page: page, data: data});
+        },
+      })
+    }
   };
 
   componentDidMount = (): void => {
