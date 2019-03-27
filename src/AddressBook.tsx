@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import AddressBookItem from './AddressbookItem'
 
-
 const AddressBook = ({toggleFavourite, favourites, search, data, onSearch}: any) => (
       <div>
         <h1>AddressBook</h1>
@@ -22,6 +21,7 @@ const AddressBook = ({toggleFavourite, favourites, search, data, onSearch}: any)
               <AddressBookItem
                 isFavourite={favourites.includes(item.email)}
                 onClick={toggleFavourite}
+                key={('abi_' + item.email)}
                 {...item}
               />)}</tbody>
           </table>}

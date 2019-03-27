@@ -5,7 +5,7 @@ const Favourites = ({ data }: any) => (
     <h1>Favourites</h1>
     <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
     <ul>
-      {data.map((d: string) => <li>{d}</li>)}
+      {data.map((d: string) => <li key={'f_' + d}>{d}</li>)}
     </ul>
     </div>
   </div>
