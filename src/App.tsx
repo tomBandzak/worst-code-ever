@@ -82,19 +82,23 @@ class App extends Component<IProps, IState> {
         <SideNav favourites={favourites} closeNav={this.toggleNavigation} open={navigation}/>
         <div className="App">
           <Switch>
-            <Route exact path="/" render={props => <AddressBook
-              {...props}
-              toggleFavourite={this.toggleFavourite}
-              favourites={favourites}
-              search={search}
-              data={data}
-              onSearch={this.onSearch}
-            />}
+            <Route
+              exact
+              path="/"
+              render={props => <AddressBook
+                {...props}
+                toggleFavourite={this.toggleFavourite}
+                favourites={favourites}
+                search={search}
+                data={data}
+                onSearch={this.onSearch}
+              />}
             />
             <Route exact path="/favourites" render={props => <Favourites  {...props} data={favourites}/>} />
           </Switch>
-          <button onClick={this.prevPage}>prev</button>{page}
-          <button onClick={this.nextPage}>next</button>
+          <button className="left-button" onClick={this.prevPage}>prev</button>
+          <strong>{page}</strong>
+          <button className="right-button" onClick={this.nextPage}>next</button>
         </div>
       </div>
     )

@@ -3,18 +3,18 @@ import AddressBookItem from './AddressbookItem'
 
 const AddressBook = ({toggleFavourite, favourites, search, data, onSearch}: any) => (
       <div>
-        <h1>AddressBook</h1>
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <input type="search" onChange={onSearch} placeholder="search"/>
+        <h1>Address Book</h1>
+        <div>
+          <input className="input" type="search" onChange={onSearch} placeholder="search"/>
         </div>
-        <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+        <div>
           {data &&
           <table>
             <thead>
             <tr>
               <th>First Name</th>
               <th>Last Name</th>
-              <th/>
+              <th>Favourite</th>
             </tr>
             </thead>
             <tbody>{data.results.map((item: any) => (!search || item.name.first.includes(search) || item.name.last.includes(search) ) &&

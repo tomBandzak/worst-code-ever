@@ -1,11 +1,10 @@
 import React from 'react'
 
-
 const AddressBookItem = (item: any) => (
-  <tr style={{ background: item.isFavourite ? '#ffe6e3' : 'none' }}>
+  <tr>
     <td>{item.name.first}</td>
     <td>{item.name.last}</td>
-    <td><button onClick={() => item.onClick(item.email)}>Like</button></td>
+    <td><span className={item.isFavourite ? "fa fa-star checked" : "fa fa-star"} onClick={() => item.onClick(item.email)}></span></td>
   </tr>
 );
 
