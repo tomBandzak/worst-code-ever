@@ -13,18 +13,7 @@ interface IState {
   search?: string,
   favourites: string[];
   page: number;
-}
-
-/* Set the width of the side navigation to 250px and the left margin of the page content to 250px */
-function openNav() {
-  // @ts-ignore
-  document.getElementById('mySidenav').style.width = '250px'
-}
-
-/* Set the width of the side navigation to 0 and the left margin of the page content to 0 */
-function closeNav() {
-  // @ts-ignore
-  document.getElementById('mySidenav').style.width = '0'
+  navigation: boolean;
 }
 
 class App extends Component<IProps, IState> {
@@ -33,8 +22,9 @@ class App extends Component<IProps, IState> {
     super(props);
     this.state = {
       location: 'home',
-      page: 1,
       favourites: [],
+      page: 1,
+      navigation: false
     }
   }
 
@@ -62,13 +52,15 @@ class App extends Component<IProps, IState> {
   };
 
   toggleFavourite = (email: string) => {
-    let index = this.state.favourites.indexOf(email);
-    if(index === -1) {
-      this.state.favourites.push(email);
+    if(this.state.favourites.includes(email)) {
+      this.setState({ favourites: this.state.favourites.filter((f) => { return f !== email; }) });
     } else {
-      delete this.state.favourites[index];
+      this.setState({ favourites: [...this.state.favourites, email] });
     }
-    this.setState({ favourites: this.state.favourites })
+  };
+
+  toggleNavigation = () => {
+    this.setState({ navigation: !this.state.navigation });
   };
 
   nextPage = () => {
@@ -82,15 +74,12 @@ class App extends Component<IProps, IState> {
   };
 
   render = () => {
-    let { data, location, search, favourites, page } = this.state;
-
-
-
+    let { data, location, search, favourites, page, navigation } = this.state;
     return (
       <div id="main">
-        <SideNav menuClickItem={this.menuClickItem} closeNav={closeNav}/>
+        <SideNav menuClickItem={this.menuClickItem} closeNav={this.toggleNavigation} open={navigation}/>
         <div className="App">
-          <button onClick={() => openNav()}>menu</button>
+          <button onClick={this.toggleNavigation}>menu</button>
           <br/><br/>
           {data && location === 'home' &&
           <div>
