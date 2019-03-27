@@ -95,7 +95,7 @@ class App extends Component<IProps, IState> {
                 nextPage={this.nextPage}
               />}
             />
-            <Route exact path="/favourites" render={props => <Favourites  {...props} data={favourites}/>} />
+            <Route exact path="/favourites" render={props => <Favourites  {...props} data={favourites} onClick={this.toggleFavourite} />} />
           </Switch>
         </div>
       </div>

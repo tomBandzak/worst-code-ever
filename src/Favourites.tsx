@@ -1,13 +1,27 @@
 import React from 'react'
 
-const Favourites = ({ data }: any) => (
+const Favourites = ({ data, onClick }: any) => (
   <div>
-    <h1>Favourites</h1>
-    <div style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
-    <ul>
-      {data.map((d: string) => <li key={'f_' + d}>{d}</li>)}
-    </ul>
-    </div>
+      <h1>Favourites</h1>
+      <div>
+        <table>
+            <thead>
+            <tr>
+                <th>E-mail address</th>
+                <th>Favourite</th>
+            </tr>
+            </thead>
+          {data &&
+          <tbody>
+          {data.map((email: any) =>
+            <tr key={'f_' + email}>
+                <td>{email}</td>
+                <td><span className="fa fa-star checked" onClick={() => onClick(email)}></span></td>
+            </tr>)}
+          </tbody>
+          }
+        </table>
+      </div>
   </div>
 );
 
